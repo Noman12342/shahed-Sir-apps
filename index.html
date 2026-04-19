@@ -531,6 +531,21 @@
         // Initialize Lucide Icons
         lucide.createIcons();
 
+        // Utility for safe date parsing across all devices (fixes 'Invalid Date' issue on mobile)
+        function safeParseDate(dateInput) {
+            if (!dateInput) return new Date();
+            let d = new Date(dateInput);
+            if (!isNaN(d.getTime())) return d;
+            
+            if (typeof dateInput === 'string') {
+                // Fix common string format issues for Safari/iOS
+                let cleaned = dateInput.replace(/,/g, '').replace(/-/g, '/');
+                d = new Date(cleaned);
+                if (!isNaN(d.getTime())) return d;
+            }
+            return new Date(); // Ultimate fallback
+        }
+
         // Global Scanner Instance
         let html5QrcodeScanner = null;
 
@@ -922,7 +937,7 @@
                 activityContainer.innerHTML = '<p class="text-xs text-gray-400 text-center py-2">No recent activity.</p>';
             } else {
                 activityContainer.innerHTML = recentLogs.map(log => {
-                    const timeString = new Date(log.scannedAt).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+                    const timeString = safeParseDate(log.scannedAt).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
                     const lightColor = log.isFirstScan ? 'bg-green-500 shadow-[0_0_4px_rgba(34,197,94,0.8)]' : 'bg-red-500 shadow-[0_0_4px_rgba(239,68,68,0.8)]';
                     return `
                     <div class="flex items-center gap-3 bg-gray-50 border border-gray-100 p-3 rounded-xl">
@@ -1215,7 +1230,7 @@
             }
 
             container.innerHTML = logs.map(log => {
-                const dateObj = new Date(log.scannedAt);
+                const dateObj = safeParseDate(log.scannedAt);
                 const dateString = dateObj.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
                 const timeString = dateObj.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
                 
@@ -1256,13 +1271,13 @@
             const endDateStr = document.getElementById('filter-end-date')?.value;
             
             if (startDateStr && endDateStr) {
-                const startObj = new Date(startDateStr);
+                const startObj = safeParseDate(startDateStr);
                 startObj.setHours(0, 0, 0, 0);
-                const endObj = new Date(endDateStr);
+                const endObj = safeParseDate(endDateStr);
                 endObj.setHours(23, 59, 59, 999);
                 
                 qrs = qrs.filter(qr => {
-                    const qrTime = new Date(qr.createdAt).getTime(); // Fix for string dates from sheet
+                    const qrTime = safeParseDate(qr.createdAt).getTime(); // Fix for string dates from sheet
                     return qrTime >= startObj.getTime() && qrTime <= endObj.getTime();
                 });
             }
@@ -1289,7 +1304,7 @@
                     `<div class="flex flex-wrap items-center gap-1 ml-2 border-l border-gray-200 pl-2 overflow-hidden shrink-0">${scannedList.map(name => `<span class="text-[9px] font-medium px-1.5 py-0.5 bg-blue-50 text-blue-600 rounded border border-blue-100 max-w-[60px] truncate" title="${name}">${name}</span>`).join('')}</div>` : '';
 
                 // Format creation date
-                const dateObj = new Date(qr.createdAt);
+                const dateObj = safeParseDate(qr.createdAt);
                 const dateString = dateObj.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
 
                 return `
