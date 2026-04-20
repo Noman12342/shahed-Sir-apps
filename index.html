@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>XYZ Company</title>
+    <title>Salim Enterprise</title>
     
     <!-- PWA & Apple Meta Tags -->
     <meta name="theme-color" content="#FF6B00">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
-    <meta name="apple-mobile-web-app-title" content="XYZ Company">
+    <meta name="apple-mobile-web-app-title" content="Salim Enterprise">
     <link rel="manifest" id="manifest-link">
 
     <!-- Google Fonts for Clean UI -->
@@ -178,7 +178,7 @@
         <header class="bg-orange-500 h-16 flex items-center justify-between px-5 shrink-0 z-20 shadow-md">
             <div class="flex items-center gap-2 text-white">
                 <i data-lucide="layers" class="w-6 h-6"></i>
-                <h1 class="font-bold text-lg tracking-wide">XYZ Company</h1>
+                <h1 class="font-bold text-lg tracking-wide">Salim Enterprise</h1>
             </div>
             <button onclick="openSidebar()" class="text-white p-1 rounded-full active:bg-orange-600 transition-colors">
                 <i data-lucide="more-vertical" class="w-6 h-6"></i>
@@ -354,7 +354,7 @@
                     <div class="flex justify-between items-start mb-6">
                         <div>
                             <h2 class="text-2xl font-bold text-gray-800 mb-1">Scanner</h2>
-                            <p class="text-xs text-gray-400">Scan XYZ secure QR codes</p>
+                            <p class="text-xs text-gray-400">Scan SE secure QR codes</p>
                         </div>
                         
                         <!-- Check Mode Toggle -->
@@ -462,7 +462,7 @@
                     <i data-lucide="layers" class="w-10 h-10 text-orange-500"></i>
                 </div>
                 <h2 class="text-2xl font-bold text-gray-800 mb-2">Welcome Back</h2>
-                <p class="text-sm text-gray-400 mb-8">Login to XYZ Company</p>
+                <p class="text-sm text-gray-400 mb-8">Login to Salim Enterprise</p>
                 
                 <form onsubmit="handleLogin(event)" class="w-full flex flex-col gap-4">
                     <input type="email" id="login-email" required placeholder="Email Address" class="w-full bg-gray-50 border border-gray-200 text-gray-800 text-sm rounded-xl px-4 py-3.5 focus:outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500 transition-all">
@@ -480,7 +480,7 @@
                     <i data-lucide="user-plus" class="w-8 h-8 text-orange-500"></i>
                 </div>
                 <h2 class="text-2xl font-bold text-gray-800 mb-1">Create Account</h2>
-                <p class="text-xs text-gray-400 mb-6">Join XYZ Company</p>
+                <p class="text-xs text-gray-400 mb-6">Join Salim Enterprise</p>
                 
                 <form onsubmit="handleSignup(event)" class="w-full flex flex-col gap-3">
                     <input type="text" id="signup-name" required placeholder="Full Name" class="w-full bg-gray-50 border border-gray-200 text-gray-800 text-sm rounded-xl px-4 py-3 focus:outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500 transition-all">
@@ -991,7 +991,8 @@
 
             valuesArray.forEach(val => {
                 const finalString = templateText.replace(/{CODE}/g, val);
-                const uniqueId = 'xyz-' + Math.floor(100000 + Math.random() * 900000);
+                // Guarantee a 10 digit unique numeric code
+                const uniqueId = 'SEPRISE-' + (Math.floor(Math.random() * 9000000000) + 1000000000).toString();
                 
                 newQRs.push({
                     id: uniqueId,
@@ -1023,8 +1024,8 @@
             
             if (!originalText) return;
 
-            // Generate a unique ID for encryption/lookup
-            const uniqueId = 'xyz-' + Math.floor(100000 + Math.random() * 900000);
+            // Generate a unique ID for encryption/lookup - Guarantees 10 digit number
+            const uniqueId = 'SEPRISE-' + (Math.floor(Math.random() * 9000000000) + 1000000000).toString();
             
             const newQR = {
                 id: uniqueId,
@@ -1250,7 +1251,7 @@
                     </div>
                     <div class="bg-white border border-gray-100 rounded-lg p-2.5 mt-1">
                         <p class="text-xs font-semibold text-gray-700 truncate" title="${log.qrTitle}">${log.qrTitle}</p>
-                        <p class="text-[10px] text-gray-400 mt-0.5 font-mono">ID: ${log.qrId.substring(0, 15)}...</p>
+                        <p class="text-[10px] text-gray-400 mt-0.5 font-mono">ID: ${log.qrId}</p>
                     </div>
                     <div class="flex items-center gap-1 mt-0.5 text-[10px] text-gray-400">
                         <i data-lucide="calendar" class="w-3 h-3"></i> ${dateString}
@@ -1311,7 +1312,7 @@
                 <div class="bg-gray-50 border border-gray-100 p-4 rounded-2xl flex justify-between items-start mb-3">
                     <div class="overflow-hidden pr-3 flex-1">
                         <p class="font-semibold text-gray-800 truncate text-sm" title="${qr.originalText}">${qr.title || qr.originalText}</p>
-                        <p class="text-[10px] text-gray-400 mt-1">ID: ${qr.id.substring(0,12)}...</p>
+                        <p class="text-[10px] text-gray-400 mt-1">ID: ${qr.id}</p>
                         <div class="flex items-center mt-1 w-full overflow-hidden">
                             <p class="text-[10px] text-gray-400 flex items-center gap-1 shrink-0"><i data-lucide="calendar" class="w-3 h-3"></i> ${dateString}</p>
                             ${listHtml}
@@ -1319,8 +1320,8 @@
                     </div>
                     <div class="flex items-center gap-1.5 flex-shrink-0 mt-0.5">
                         <span class="text-[10px] font-bold px-2 py-1 bg-gray-200 text-gray-600 rounded-lg">Scans: ${qr.scanCount || 0}</span>
-                        <button onclick="downloadSecureQR('${qr.id}')" class="bg-orange-50 text-orange-500 p-2.5 rounded-xl active:scale-95 transition-transform border border-orange-100 ml-1">
-                            <i data-lucide="download" class="w-5 h-5"></i>
+                        <button onclick="previewSecureQR('${qr.id}')" class="bg-orange-50 text-orange-500 p-2.5 rounded-xl active:scale-95 transition-transform border border-orange-100 ml-1">
+                            <i data-lucide="eye" class="w-5 h-5"></i>
                         </button>
                         <button onclick="promptDeleteQR('${qr.id}')" class="bg-red-50 text-red-500 p-2.5 rounded-xl active:scale-95 transition-transform border border-red-100">
                             <i data-lucide="trash-2" class="w-5 h-5"></i>
@@ -1385,10 +1386,10 @@
             showCustomAlert('Deleted', 'The QR Code has been securely deleted.', 'check-circle', 'text-green-500', 'bg-green-50');
         }
 
-        function downloadSecureQR(id) {
+        function previewSecureQR(id) {
             // The QR code payload only contains the secure ID. 
             // Normal scanners won't see the text.
-            const payload = `xyz-secure-payload:${id}`;
+            const payload = `This QR use Only Salim Enterprise Apps-So Please Don't Scan Other Apps. Your Error ID-payload:${id}`;
             
             // Find the QR title for the filename
             let qrs = JSON.parse(localStorage.getItem('xyz_secure_qrs') || '[]');
@@ -1404,57 +1405,62 @@
                 });
                 const url = qr.toDataURL('image/png');
 
-                // Try standard download (Will work on real hosted servers)
-                try {
-                    const link = document.createElement('a');
-                    link.href = url;
-                    link.download = `${qrTitle}.png`;
-                    document.body.appendChild(link);
-                    link.click();
-                    document.body.removeChild(link);
-                } catch (error) {
-                    console.log("Direct download blocked by preview environment.");
-                }
-
-                // Fallback: Show Modal with Image for manual saving
-                showQRModal(url);
+                // Show Modal with Image for preview and downloading
+                showQRModal(url, qrTitle);
             } catch (err) {
                 console.error("QR Generation failed:", err);
             }
         }
 
         // --- Fallback Modal for QR Code ---
-        function showQRModal(url) {
+        function showQRModal(url, title) {
             let modal = document.getElementById('qr-preview-modal');
+            const safeTitle = title.replace(/'/g, "\\'").replace(/"/g, '&quot;');
             
             // Create modal if it doesn't exist
             if (!modal) {
                 modal = document.createElement('div');
                 modal.id = 'qr-preview-modal';
                 modal.className = 'absolute inset-0 z-[100] bg-black/60 backdrop-blur-sm flex flex-col items-center justify-center p-6 opacity-0 transition-opacity duration-300 pointer-events-none';
-                modal.innerHTML = `
-                    <div class="bg-white p-5 rounded-3xl w-full max-w-xs flex flex-col items-center transform scale-95 transition-transform duration-300" id="qr-modal-content">
-                        <div class="w-full flex justify-end mb-2">
-                            <button onclick="closeQRModal()" class="bg-gray-100 text-gray-500 p-2 rounded-full active:scale-95 transition-transform">
-                                <i data-lucide="x" class="w-4 h-4"></i>
-                            </button>
-                        </div>
-                        <img id="qr-preview-img" src="" class="w-full h-auto rounded-xl border border-gray-100 shadow-sm mb-4">
-                        <p class="text-gray-500 text-center text-[13px] mb-2 font-medium">Long-press or Right-click the image to save</p>
-                    </div>
-                `;
                 document.querySelector('.app-container').appendChild(modal);
-                lucide.createIcons(); // Re-initialize icons for the new modal
             }
 
-            // Update image source
-            document.getElementById('qr-preview-img').src = url;
+            // Dynamically setup modal content
+            modal.innerHTML = `
+                <div class="bg-white p-5 rounded-3xl w-full max-w-xs flex flex-col items-center transform scale-95 transition-transform duration-300" id="qr-modal-content">
+                    <div class="w-full flex justify-between items-center mb-4">
+                        <h3 class="font-bold text-gray-800 text-sm truncate pr-2">${title}</h3>
+                        <button onclick="closeQRModal()" class="bg-gray-100 text-gray-500 p-2 rounded-full active:scale-95 transition-transform shrink-0">
+                            <i data-lucide="x" class="w-4 h-4"></i>
+                        </button>
+                    </div>
+                    <img id="qr-preview-img" src="${url}" class="w-full h-auto rounded-xl border border-gray-100 shadow-sm mb-4">
+                    <button onclick="executeDownload('${url}', '${safeTitle}')" class="w-full bg-orange-500 text-white font-semibold rounded-xl py-3.5 active:scale-95 transition-transform flex items-center justify-center gap-2 shadow-sm shadow-orange-200">
+                        <i data-lucide="download" class="w-5 h-5"></i>
+                        Download QR
+                    </button>
+                </div>
+            `;
+            lucide.createIcons(); // Re-initialize icons for the new modal
 
             // Show modal with animation
             modal.classList.remove('pointer-events-none');
             void modal.offsetWidth; // trigger reflow
             modal.classList.remove('opacity-0');
             document.getElementById('qr-modal-content').classList.remove('scale-95');
+        }
+
+        window.executeDownload = function(url, filename) {
+            try {
+                const link = document.createElement('a');
+                link.href = url;
+                link.download = `${filename}.png`;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            } catch (error) {
+                console.log("Direct download blocked by preview environment.");
+            }
         }
 
         window.closeQRModal = function() {
@@ -1525,8 +1531,20 @@
             resultCard.classList.remove('hidden');
 
             // Verify the QR content
-            if (decodedText.startsWith('xyz-secure-payload:')) {
-                const qrId = decodedText.split(':')[1];
+            const securePrefix = "This QR use Only Salim Enterprise Apps-So Please Don't Scan Other Apps. Your Error ID-payload:";
+            const legacyPrefix1 = "seprise-secure-payload:";
+            const legacyPrefix2 = "xyz-secure-payload:";
+            
+            let qrId = null;
+            if (decodedText.startsWith(securePrefix)) {
+                qrId = decodedText.substring(securePrefix.length);
+            } else if (decodedText.startsWith(legacyPrefix1)) {
+                qrId = decodedText.substring(legacyPrefix1.length);
+            } else if (decodedText.startsWith(legacyPrefix2)) {
+                qrId = decodedText.substring(legacyPrefix2.length);
+            }
+
+            if (qrId) {
                 let qrs = JSON.parse(localStorage.getItem('xyz_secure_qrs') || '[]');
                 const qrIndex = qrs.findIndex(q => q.id === qrId);
 
@@ -1607,7 +1625,7 @@
                     setupErrorResult(iconContainer, icon, title, text, "QR not found in database.");
                 }
             } else {
-                // Not an XYZ secure QR
+                // Not an SE secure QR
                 setupErrorResult(iconContainer, icon, title, text, "Invalid or unrecognized QR Code.");
             }
             
@@ -1640,11 +1658,11 @@
 
         // --- PWA Setup: Inline Manifest & Service Worker for 'Add to Home Screen' ---
         // Dynamically creating manifest.json
-        const appIconSVG = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%23FF6B00'/%3E%3Ctext x='50' y='50' font-family='Arial' font-weight='bold' font-size='28' fill='white' text-anchor='middle' dominant-baseline='middle'%3EXYZ%3C/text%3E%3C/svg%3E";
+        const appIconSVG = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%23FF6B00'/%3E%3Ctext x='50' y='50' font-family='Arial' font-weight='bold' font-size='28' fill='white' text-anchor='middle' dominant-baseline='middle'%3ESE%3C/text%3E%3C/svg%3E";
         
         const manifest = {
-            "name": "XYZ Company",
-            "short_name": "XYZ App",
+            "name": "Salim Enterprise",
+            "short_name": "SE App",
             "start_url": window.location.href,
             "display": "standalone",
             "background_color": "#ffffff",
